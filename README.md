@@ -28,7 +28,7 @@ CONTACT_TO=
 CONTACT_FROM=
 PORT=3001
 GEMINI_API_KEY=
-GEMINI_MODEL=gemini-2.5-flash
+GEMINI_MODEL=gemini-3.8-flash
 ```
 
 ## Develop
