@@ -85,8 +85,9 @@ async function generateOnce(apiKey, model, body) {
  */
 export async function chatWithGemini(messages) {
   const apiKey = process.env.GEMINI_API_KEY?.trim()
-  const primary = process.env.GEMINI_MODEL?.trim() || 'gemini-2.5-flash'
-  const models = [...new Set([primary, 'gemini-2.5-flash', 'gemini-2.0-flash'])]
+  // Prod-safe defaults: 2.0-flash is retired; prefer 3.8-flash (Google's current recommendation)
+  const primary = process.env.GEMINI_MODEL?.trim() || 'gemini-3.8-flash'
+  const models = [...new Set([primary, 'gemini-3.8-flash', 'gemini-2.5-flash'])]
 
   if (!apiKey) {
     const err = new Error('GEMINI_API_KEY is not configured.')

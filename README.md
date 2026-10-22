@@ -55,7 +55,7 @@ npm run dev
 | Name | Required | Notes |
 |------|----------|--------|
 | `GEMINI_API_KEY` | Yes (for SunaoBot) | Server-only. Never use a `VITE_` prefix. |
-| `GEMINI_MODEL` | Optional | Defaults to `gemini-2.5-flash` |
+| `GEMINI_MODEL` | Optional | Defaults to `gemini-3.8-flash` (do not use retired `gemini-2.0-flash`) |
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_SECURE` / `SMTP_USER` / `SMTP_PASS` | For contact form | |
 | `CONTACT_TO` / `CONTACT_FROM` | For contact form | |
 
