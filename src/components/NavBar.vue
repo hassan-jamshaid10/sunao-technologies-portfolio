@@ -7,6 +7,7 @@ import { useTheme } from '../composables/useTheme'
 const { theme, toggleTheme } = useTheme()
 const scrolled = ref(false)
 const open = ref(false)
+const navEl = ref<HTMLElement | null>(null)
 
 const links = [
   { to: '/services', label: 'Services', isRoute: true },
@@ -15,6 +16,12 @@ const links = [
   { to: '/about', label: 'About', isRoute: true },
   { to: '/contact', label: 'Contact', isRoute: true },
 ]
+
+function syncNavHeight() {
+  if (!navEl.value) return
+  const h = navEl.value.getBoundingClientRect().height
+  document.documentElement.style.setProperty('--nav-h', `${Math.ceil(h)}px`)
+}
 
 function onScroll() {
   scrolled.value = window.scrollY > 12
@@ -30,51 +37,33 @@ function onKeydown(e: KeyboardEvent) {
 
 watch(open, (isOpen) => {
   document.body.style.overflow = isOpen ? 'hidden' : ''
+  syncNavHeight()
 })
 
 onMounted(() => {
   onScroll()
+  syncNavHeight()
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', syncNavHeight, { passive: true })
   window.addEventListener('keydown', onKeydown)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('resize', syncNavHeight)
   window.removeEventListener('keydown', onKeydown)
   document.body.style.overflow = ''
 })
 </script>
 
 <template>
-  <header class="nav" :class="{ scrolled, open }">
-    <div class="nav-inner">
+  <header ref="navEl" class="nav" :class="{ scrolled, open }">
+    <div class="nav-bar">
       <RouterLink class="brand" to="/" @click="close">
         <span class="brand-text">
           Sunao<span class="brand-sub">Technologies</span>
         </span>
       </RouterLink>
-
-      <nav id="site-nav" class="nav-links" :class="{ open }">
-        <template v-for="link in links" :key="link.label">
-          <RouterLink v-if="link.isRoute" :to="link.to" @click="close">
-            {{ link.label }}
-          </RouterLink>
-          <a v-else :href="link.to" @click="close">{{ link.label }}</a>
-        </template>
-
-        <RouterLink class="mobile-cta" to="/contact" @click="close">
-          Get Started
-        </RouterLink>
-
-        <button
-          class="theme-btn mobile-only"
-          type="button"
-          @click="toggleTheme"
-          :aria-label="`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`"
-        >
-          {{ theme === 'dark' ? 'Light mode' : 'Dark mode' }}
-        </button>
-      </nav>
 
       <div class="nav-actions">
         <button
@@ -105,6 +94,30 @@ onUnmounted(() => {
         </button>
       </div>
     </div>
+
+    <nav id="site-nav" class="nav-links" :class="{ open }">
+      <div class="nav-links-inner">
+        <template v-for="link in links" :key="link.label">
+          <RouterLink v-if="link.isRoute" :to="link.to" @click="close">
+            {{ link.label }}
+          </RouterLink>
+          <a v-else :href="link.to" @click="close">{{ link.label }}</a>
+        </template>
+
+        <RouterLink class="mobile-cta" to="/contact" @click="close">
+          Get Started
+        </RouterLink>
+
+        <button
+          class="theme-btn mobile-only"
+          type="button"
+          @click="toggleTheme"
+          :aria-label="`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`"
+        >
+          {{ theme === 'dark' ? 'Light mode' : 'Dark mode' }}
+        </button>
+      </div>
+    </nav>
   </header>
 </template>
 
@@ -115,9 +128,11 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   z-index: 90;
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  padding-top: env(safe-area-inset-top, 0px);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
   border-bottom: 1px solid transparent;
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  backdrop-filter: blur(18px) saturate(1.15);
   transition:
     background 0.25s ease,
     border-color 0.25s ease,
@@ -127,11 +142,13 @@ onUnmounted(() => {
 .nav.scrolled,
 .nav.open {
   border-bottom-color: var(--border);
-  box-shadow: 0 8px 24px color-mix(in srgb, #000 6%, transparent);
-  background: color-mix(in srgb, var(--bg) 96%, transparent);
+  box-shadow: 0 10px 28px color-mix(in srgb, #000 8%, transparent);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
 }
 
-.nav-inner {
+.nav-bar {
+  position: relative;
+  z-index: 3;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0.85rem clamp(1rem, 4vw, 2.5rem);
@@ -148,7 +165,6 @@ onUnmounted(() => {
   align-items: center;
   text-decoration: none;
   color: var(--text);
-  z-index: 2;
   flex-shrink: 1;
   min-width: 0;
 }
@@ -176,6 +192,31 @@ onUnmounted(() => {
   gap: 1.75rem;
   flex: 1;
   justify-content: center;
+}
+
+/* Desktop: put links between brand and actions via absolute centering */
+@media (min-width: 961px) {
+  .nav-links {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    padding: 0;
+    background: transparent;
+    pointer-events: auto;
+  }
+
+  .nav-links-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .nav-bar {
+    position: relative;
+  }
 }
 
 .nav-links a {
@@ -290,9 +331,15 @@ onUnmounted(() => {
 }
 
 @media (max-width: 960px) {
-  .nav-inner {
+  .nav {
+    background: color-mix(in srgb, var(--bg) 72%, transparent);
+    -webkit-backdrop-filter: blur(22px) saturate(1.2);
+    backdrop-filter: blur(22px) saturate(1.2);
+  }
+
+  .nav-bar {
     gap: 0.75rem;
-    padding: 0.7rem 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .brand {
@@ -304,37 +351,48 @@ onUnmounted(() => {
     font-size: 1.05rem;
   }
 
-  /* Overlay must not occupy flex space in the top bar */
   .nav-links {
     position: fixed;
-    inset: 0;
-    top: 0;
+    top: var(--nav-h, calc(3.75rem + env(safe-area-inset-top, 0px)));
     left: 0;
     right: 0;
     bottom: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
     margin: 0;
     flex: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1.35rem;
-    padding: 5.5rem 1.5rem 2rem;
+    display: block;
+    transform: none;
+    padding: 0;
     box-sizing: border-box;
-    background: color-mix(in srgb, var(--bg) 97%, transparent);
-    backdrop-filter: blur(18px);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(28px) saturate(1.25);
+    backdrop-filter: blur(28px) saturate(1.25);
+    border-top: 1px solid var(--border);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transition: opacity 0.25s ease, visibility 0.25s ease;
-    z-index: 1;
+    z-index: 2;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-links.open {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+  }
+
+  .nav-links-inner {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
   }
 
   .nav-links a {
@@ -348,7 +406,7 @@ onUnmounted(() => {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: 0.35rem;
+    margin-top: 0.5rem;
     padding: 0.85rem 1.35rem;
     background: var(--accent);
     color: var(--on-accent);
