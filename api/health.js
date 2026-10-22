@@ -1,0 +1,6 @@
+export default async function handler(_req, res) {
+  return res.status(200).json({
+    ok: true,
+    chat: Boolean(process.env.GEMINI_API_KEY?.trim()),
+  })
+}
