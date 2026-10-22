@@ -332,23 +332,47 @@ onUnmounted(() => {
 
 @media (max-width: 960px) {
   .nav {
-    background: color-mix(in srgb, var(--bg) 72%, transparent);
-    -webkit-backdrop-filter: blur(22px) saturate(1.2);
-    backdrop-filter: blur(22px) saturate(1.2);
+    background: #ffffff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-bottom-color: #e4dbd4;
+  }
+
+  .nav.scrolled,
+  .nav.open {
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   }
 
   .nav-bar {
     gap: 0.75rem;
     padding: 0.75rem 1rem;
+    background: #ffffff;
   }
 
   .brand {
     flex: 1 1 auto;
     max-width: calc(100% - 3.25rem);
+    color: #0a0a0a;
   }
 
   .brand-text {
     font-size: 1.05rem;
+    color: #0a0a0a;
+  }
+
+  .brand-sub {
+    color: #5a5456;
+  }
+
+  .menu-btn {
+    display: flex;
+    background: #ffffff;
+    border-color: #0a0a0a;
+  }
+
+  .menu-btn span {
+    background: #0a0a0a;
   }
 
   .nav-links {
@@ -365,14 +389,14 @@ onUnmounted(() => {
     transform: none;
     padding: 0;
     box-sizing: border-box;
-    background: color-mix(in srgb, var(--bg) 78%, transparent);
-    -webkit-backdrop-filter: blur(28px) saturate(1.25);
-    backdrop-filter: blur(28px) saturate(1.25);
-    border-top: 1px solid var(--border);
+    background: #ffffff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-top: 1px solid #e4dbd4;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
     z-index: 2;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -393,13 +417,19 @@ onUnmounted(() => {
     gap: 1.25rem;
     padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom, 0px));
     box-sizing: border-box;
+    background: #ffffff;
   }
 
   .nav-links a {
     font-family: var(--font-display);
     font-size: clamp(1.35rem, 6vw, 1.75rem);
     font-weight: 600;
-    color: var(--text);
+    color: #0a0a0a;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.router-link-active {
+    color: #0a0a0a;
   }
 
   .mobile-cta {
@@ -408,8 +438,8 @@ onUnmounted(() => {
     justify-content: center;
     margin-top: 0.5rem;
     padding: 0.85rem 1.35rem;
-    background: var(--accent);
-    color: var(--on-accent);
+    background: #0a0a0a;
+    color: #ffffff;
     font-size: 0.95rem !important;
     font-family: var(--font-body) !important;
     font-weight: 650 !important;
@@ -426,10 +456,9 @@ onUnmounted(() => {
     height: auto;
     padding: 0.7rem 1rem;
     margin-top: 0.35rem;
-  }
-
-  .menu-btn {
-    display: flex;
+    background: #ffffff;
+    border-color: #0a0a0a;
+    color: #0a0a0a;
   }
 
   .nav-actions {
