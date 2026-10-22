@@ -104,10 +104,6 @@ onUnmounted(() => {
           <a v-else :href="link.to" @click="close">{{ link.label }}</a>
         </template>
 
-        <RouterLink class="mobile-cta" to="/contact" @click="close">
-          Get Started
-        </RouterLink>
-
         <button
           class="theme-btn mobile-only"
           type="button"
@@ -194,7 +190,6 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-/* Desktop: put links between brand and actions via absolute centering */
 @media (min-width: 961px) {
   .nav-links {
     position: absolute;
@@ -259,8 +254,7 @@ onUnmounted(() => {
   color: var(--accent);
 }
 
-.mobile-only,
-.mobile-cta {
+.mobile-only {
   display: none;
 }
 
@@ -332,47 +326,48 @@ onUnmounted(() => {
 
 @media (max-width: 960px) {
   .nav {
-    background: #ffffff;
+    background: var(--surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    border-bottom-color: #e4dbd4;
+    border-bottom-color: var(--border);
   }
 
   .nav.scrolled,
   .nav.open {
-    background: #ffffff;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    background: var(--surface);
+    box-shadow: 0 8px 20px color-mix(in srgb, #000 8%, transparent);
   }
 
   .nav-bar {
     gap: 0.75rem;
     padding: 0.75rem 1rem;
-    background: #ffffff;
+    background: var(--surface);
   }
 
   .brand {
     flex: 1 1 auto;
     max-width: calc(100% - 3.25rem);
-    color: #0a0a0a;
+    color: var(--text);
   }
 
   .brand-text {
-    font-size: 1.05rem;
-    color: #0a0a0a;
+    font-size: 1.02rem;
+    color: var(--text);
   }
 
   .brand-sub {
-    color: #5a5456;
+    display: inline;
+    color: var(--text-muted);
   }
 
   .menu-btn {
     display: flex;
-    background: #ffffff;
-    border-color: #0a0a0a;
+    background: var(--surface);
+    border-color: var(--border-strong);
   }
 
   .menu-btn span {
-    background: #0a0a0a;
+    background: var(--text);
   }
 
   .nav-links {
@@ -389,10 +384,10 @@ onUnmounted(() => {
     transform: none;
     padding: 0;
     box-sizing: border-box;
-    background: #ffffff;
+    background: var(--surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    border-top: 1px solid #e4dbd4;
+    border-top: 1px solid var(--border);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -417,32 +412,19 @@ onUnmounted(() => {
     gap: 1.25rem;
     padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom, 0px));
     box-sizing: border-box;
-    background: #ffffff;
+    background: var(--surface);
   }
 
   .nav-links a {
     font-family: var(--font-display);
     font-size: clamp(1.35rem, 6vw, 1.75rem);
     font-weight: 600;
-    color: #0a0a0a;
+    color: var(--text);
   }
 
   .nav-links a:hover,
   .nav-links a.router-link-active {
-    color: #0a0a0a;
-  }
-
-  .mobile-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 0.5rem;
-    padding: 0.85rem 1.35rem;
-    background: #0a0a0a;
-    color: #ffffff;
-    font-size: 0.95rem !important;
-    font-family: var(--font-body) !important;
-    font-weight: 650 !important;
+    color: var(--text);
   }
 
   .desktop-only,
@@ -456,9 +438,9 @@ onUnmounted(() => {
     height: auto;
     padding: 0.7rem 1rem;
     margin-top: 0.35rem;
-    background: #ffffff;
-    border-color: #0a0a0a;
-    color: #0a0a0a;
+    background: var(--surface);
+    border-color: var(--border-strong);
+    color: var(--text);
   }
 
   .nav-actions {
@@ -468,11 +450,7 @@ onUnmounted(() => {
 
 @media (max-width: 420px) {
   .brand-text {
-    font-size: 0.98rem;
-  }
-
-  .brand-sub {
-    display: none;
+    font-size: 0.92rem;
   }
 }
 </style>
