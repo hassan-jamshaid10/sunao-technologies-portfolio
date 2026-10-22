@@ -94,9 +94,9 @@ const actionLinks = [
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 60% 50% at 80% 100%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
-    linear-gradient(160deg, #041018 0%, #0a1c28 42%, #07131a 100%);
-  color: rgba(255, 255, 255, 0.7);
+    radial-gradient(ellipse 60% 50% at 80% 100%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
+    linear-gradient(160deg, #1a1216 0%, #2a1c24 42%, #241820 100%);
+  color: rgba(247, 243, 239, 0.72);
 }
 
 .footer::before {

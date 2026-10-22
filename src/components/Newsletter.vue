@@ -87,8 +87,8 @@ function onSubmit() {
   position: relative;
   padding: clamp(2.5rem, 5vw, 3.5rem);
   background:
-    radial-gradient(ellipse 80% 60% at 70% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
-    linear-gradient(135deg, #041018 0%, #0a2a36 45%, #0a5c50 100%);
+    radial-gradient(ellipse 80% 60% at 70% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
+    linear-gradient(135deg, #1a1216 0%, #2e1f28 45%, #a85f74 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -181,7 +181,7 @@ h2 {
 }
 
 .primary {
-  color: #042f2e;
+  color: var(--on-accent);
   background: var(--accent);
 }
 
@@ -209,7 +209,7 @@ h2 {
 
 .right {
   position: relative;
-  background: linear-gradient(145deg, #0a2a36 0%, #0a5c50 40%, #11806a 100%);
+  background: linear-gradient(145deg, #2a1c24 0%, #a85f74 40%, #e5a07a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -269,7 +269,7 @@ h2 {
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #0b1c1a;
+  color: #0a0a0a;
 }
 
 .doc-badge {
@@ -280,8 +280,8 @@ h2 {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #0b5c56;
-  background: color-mix(in srgb, #0f766e 14%, #fff);
+  color: #a85f74;
+  background: color-mix(in srgb, #c97b8f 14%, #fff);
   padding: 0.3rem 0.55rem;
 }
 
@@ -292,14 +292,14 @@ h2 {
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.03em;
-  color: #0b1c1a;
+  color: #0a0a0a;
 }
 
 .doc-footer {
   margin-top: 0.85rem;
   font-size: 0.78rem;
   line-height: 1.5;
-  color: #4b635f;
+  color: #5a5456;
 }
 
 @media (max-width: 900px) {

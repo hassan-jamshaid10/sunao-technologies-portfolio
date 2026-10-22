@@ -55,7 +55,7 @@ export function applySeo(meta: SeoMeta) {
   upsertMeta('name', 'description', description)
   upsertMeta('name', 'robots', meta.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large')
   upsertMeta('name', 'author', SITE_NAME)
-  upsertMeta('name', 'theme-color', '#0f766e')
+  upsertMeta('name', 'theme-color', '#c97b8f')
 
   upsertMeta('property', 'og:site_name', SITE_NAME)
   upsertMeta('property', 'og:title', title)

@@ -242,12 +242,12 @@ defineProps<{
   justify-content: space-between;
   gap: 0.5rem;
   padding: 0.45rem 0.55rem;
-  background: color-mix(in srgb, #0f766e 85%, #000);
+  background: color-mix(in srgb, #c97b8f 85%, #1a1216);
 }
 
 .s-top.amber,
 .m-top.amber {
-  background: color-mix(in srgb, #b45309 75%, #1a1200);
+  background: color-mix(in srgb, #e5a07a 75%, #1a1216);
 }
 
 .brand,
@@ -311,7 +311,7 @@ defineProps<{
 .bars i {
   flex: 1;
   height: var(--h);
-  background: linear-gradient(180deg, #2dd4bf, #0f766e);
+  background: linear-gradient(180deg, #e0a8b6, #c97b8f);
 }
 
 .stats {
@@ -355,7 +355,7 @@ defineProps<{
 }
 
 .row em {
-  color: #f0b429;
+  color: #e5a07a;
 }
 
 .m-title {
@@ -379,11 +379,11 @@ defineProps<{
   gap: 0.4rem;
   align-items: center;
   padding: 0.4rem;
-  color: #2dd4bf;
+  color: #e0a8b6;
 }
 
 .stage.amber .m-card {
-  color: #f0b429;
+  color: #e5a07a;
 }
 
 .m-cta {
@@ -391,8 +391,8 @@ defineProps<{
   border: 0;
   width: 100%;
   padding: 0.55rem;
-  background: #f0b429;
-  color: #1a1200;
+  background: #e5a07a;
+  color: #1a1216;
   font: inherit;
   font-size: 0.58rem;
   font-weight: 700;
