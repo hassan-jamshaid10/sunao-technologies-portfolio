@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useTheme } from '../composables/useTheme'
 
@@ -24,13 +24,24 @@ function close() {
   open.value = false
 }
 
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') close()
+}
+
+watch(open, (isOpen) => {
+  document.body.style.overflow = isOpen ? 'hidden' : ''
+})
+
 onMounted(() => {
   onScroll()
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('keydown', onKeydown)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('keydown', onKeydown)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -39,7 +50,7 @@ onUnmounted(() => {
     <div class="nav-inner">
       <RouterLink class="brand" to="/" @click="close">
         <span class="brand-text">
-          Sunao<span>Technologies</span>
+          Sunao<span class="brand-sub">Technologies</span>
         </span>
       </RouterLink>
 
@@ -50,6 +61,10 @@ onUnmounted(() => {
           </RouterLink>
           <a v-else :href="link.to" @click="close">{{ link.label }}</a>
         </template>
+
+        <RouterLink class="mobile-cta" to="/contact" @click="close">
+          Get Started
+        </RouterLink>
 
         <button
           class="theme-btn mobile-only"
@@ -99,7 +114,7 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 90;
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   border-bottom: 1px solid transparent;
   backdrop-filter: blur(12px);
@@ -109,19 +124,23 @@ onUnmounted(() => {
     box-shadow 0.25s ease;
 }
 
-.nav.scrolled {
+.nav.scrolled,
+.nav.open {
   border-bottom-color: var(--border);
   box-shadow: 0 8px 24px color-mix(in srgb, #000 6%, transparent);
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
 }
 
 .nav-inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0.85rem clamp(1.25rem, 4vw, 2.5rem);
+  padding: 0.85rem clamp(1rem, 4vw, 2.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
+  min-height: 3.75rem;
+  box-sizing: border-box;
 }
 
 .brand {
@@ -130,7 +149,8 @@ onUnmounted(() => {
   text-decoration: none;
   color: var(--text);
   z-index: 2;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .brand-text {
@@ -138,10 +158,13 @@ onUnmounted(() => {
   font-weight: 700;
   font-size: 1.3rem;
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.brand-text span {
+.brand-sub {
   font-weight: 500;
   color: var(--text-muted);
   margin-left: 0.28rem;
@@ -172,8 +195,9 @@ onUnmounted(() => {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  flex-shrink: 0;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  flex: 0 0 auto;
   z-index: 2;
 }
 
@@ -194,7 +218,8 @@ onUnmounted(() => {
   color: var(--accent);
 }
 
-.mobile-only {
+.mobile-only,
+.mobile-cta {
   display: none;
 }
 
@@ -236,12 +261,13 @@ onUnmounted(() => {
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border: 1px solid var(--border-strong);
   background: var(--surface);
   cursor: pointer;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .menu-btn span {
@@ -264,33 +290,75 @@ onUnmounted(() => {
 }
 
 @media (max-width: 960px) {
+  .nav-inner {
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .brand {
+    flex: 1 1 auto;
+    max-width: calc(100% - 3.25rem);
+  }
+
+  .brand-text {
+    font-size: 1.05rem;
+  }
+
+  /* Overlay must not occupy flex space in the top bar */
   .nav-links {
     position: fixed;
     inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    flex: none;
     flex-direction: column;
     justify-content: center;
-    gap: 1.5rem;
-    background: color-mix(in srgb, var(--bg) 96%, transparent);
+    align-items: center;
+    gap: 1.35rem;
+    padding: 5.5rem 1.5rem 2rem;
+    box-sizing: border-box;
+    background: color-mix(in srgb, var(--bg) 97%, transparent);
     backdrop-filter: blur(18px);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
     z-index: 1;
   }
 
   .nav-links.open {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
 
   .nav-links a {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: clamp(1.35rem, 6vw, 1.75rem);
     font-weight: 600;
     color: var(--text);
   }
 
-  .desktop-only {
+  .mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.35rem;
+    padding: 0.85rem 1.35rem;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 0.95rem !important;
+    font-family: var(--font-body) !important;
+    font-weight: 650 !important;
+  }
+
+  .desktop-only,
+  .cta {
     display: none;
   }
 
@@ -299,14 +367,24 @@ onUnmounted(() => {
     width: auto;
     height: auto;
     padding: 0.7rem 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.35rem;
   }
 
   .menu-btn {
     display: flex;
   }
 
-  .cta {
+  .nav-actions {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-text {
+    font-size: 0.98rem;
+  }
+
+  .brand-sub {
     display: none;
   }
 }
