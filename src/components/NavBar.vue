@@ -200,6 +200,7 @@ onUnmounted(() => {
     height: auto;
     padding: 0;
     background: transparent;
+    z-index: 4;
     pointer-events: auto;
   }
 
@@ -209,8 +210,16 @@ onUnmounted(() => {
     gap: 1.75rem;
   }
 
+  /* Full-width bar sits under the centered links so they stay clickable */
   .nav-bar {
     position: relative;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .brand,
+  .nav-actions {
+    pointer-events: auto;
   }
 }
 
