@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
+import sunaoIcon from '../assets/sunao-icon.png'
 import { useTheme } from '../composables/useTheme'
 
 const { theme, toggleTheme } = useTheme()
@@ -60,6 +61,7 @@ onUnmounted(() => {
   <header ref="navEl" class="nav" :class="{ scrolled, open }">
     <div class="nav-bar">
       <RouterLink class="brand" to="/" @click="close">
+        <img :src="sunaoIcon" alt="" class="brand-mark" />
         <span class="brand-text">
           Sunao<span class="brand-sub">Technologies</span>
         </span>
@@ -159,10 +161,18 @@ onUnmounted(() => {
 .brand {
   display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
   text-decoration: none;
   color: var(--text);
   flex-shrink: 1;
   min-width: 0;
+}
+
+.brand-mark {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .brand-text {

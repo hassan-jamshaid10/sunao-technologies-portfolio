@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { RouterLink } from 'vue-router'
+import sunaoMark from '../assets/sunao-mark.png'
 import HowWeWork from '../components/HowWeWork.vue'
 import { useTypewriter } from '../composables/useTypewriter'
 
@@ -28,9 +29,9 @@ const values = [
     copy: 'Security, observability, and maintainability are designed in from the first sprint.',
   },
   {
-    icon: 'lucide:handshake',
-    title: 'Clear partnership',
-    copy: 'Sunao means honesty, transparent timelines, tradeoffs, and outcomes you can trust.',
+    icon: 'lucide:ear',
+    title: 'Tell me',
+    copy: '"Sunao" is Urdu for "tell me." We listen before we design, so what we build answers the problem people actually described.',
   },
 ]
 </script>
@@ -38,37 +39,48 @@ const values = [
 <template>
   <div class="page">
     <section class="hero">
-      <div class="inner">
-        <p class="eyebrow">About Sunao Technologies</p>
-        <h1>
-          <span>{{ text }}</span><span class="caret" aria-hidden="true" />
-        </h1>
-        <p class="lede">
-          We are an AI-first software company building platforms, products, and enterprise systems,
-          including SunaoAI and PukaarAI, with clarity from architecture to launch.
-        </p>
-        <div class="actions">
-          <RouterLink class="btn primary" to="/services">Our services</RouterLink>
-          <RouterLink class="btn ghost" to="/contact">Work with us</RouterLink>
+      <div class="inner hero-grid">
+        <div>
+          <p class="eyebrow">About Sunao Technologies</p>
+          <h1>
+            <span>{{ text }}</span><span class="caret" aria-hidden="true" />
+          </h1>
+          <p class="lede">
+            We are an AI-first software company building platforms, products, and enterprise systems,
+            including PukaarAI, SunaoCall, and SunaoAI, with clarity from architecture to launch.
+          </p>
+          <div class="actions">
+            <RouterLink class="btn primary" to="/services">Our services</RouterLink>
+            <RouterLink class="btn ghost" to="/contact">Work with us</RouterLink>
+          </div>
         </div>
+        <img :src="sunaoMark" alt="Sunao logo mark" class="mark" />
       </div>
     </section>
 
     <section class="story">
       <div class="inner split">
         <div>
-          <p class="eyebrow">Who we are</p>
-          <h2>Software that thinks, ships, and lasts</h2>
+          <p class="eyebrow">Why we started</p>
+          <h2>We noticed the problems nobody was building for</h2>
         </div>
         <div class="copy">
+          <p>
+            Sunao started with listening, not a roadmap. We talked to Pakistani families watching
+            an elder slow down and brushing it off as "umar ka asar hoga," just age, until it was
+            too late to act early. We talked to employees who had real concerns but no safe way to
+            raise them in their own language. The problems were already there; nobody had built
+            for them.
+          </p>
           <p>
             Sunao Technologies partners with teams that need more than a prototype. We design and
             deliver ML systems, cloud infrastructure, web and mobile products, ERP/CRM platforms,
             healthcare software, and enterprise solutions.
           </p>
           <p>
-            Our products, SunaoAI for dementia detection and PukaarAI for voice-first anonymous
-            reporting, reflect how we work: intelligent systems grounded in real workflows.
+            Our products, PukaarAI for voice-first anonymous reporting, SunaoCall for elder
+            medication support, and SunaoAI, our research effort in Urdu cognitive-health
+            screening, reflect how we work: listen first, then build what was actually asked for.
           </p>
         </div>
       </div>
@@ -113,6 +125,18 @@ const values = [
   grid-template-columns: 1fr 1.1fr;
   gap: 2.5rem;
   align-items: start;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.mark {
+  width: min(220px, 100%);
+  justify-self: center;
 }
 
 .eyebrow {
@@ -269,8 +293,14 @@ h1 {
 
 @media (max-width: 860px) {
   .inner.split,
+  .hero-grid,
   .value-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mark {
+    width: 140px;
+    order: -1;
   }
 
   .value {

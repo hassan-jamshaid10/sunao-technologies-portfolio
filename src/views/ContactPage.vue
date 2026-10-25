@@ -25,8 +25,8 @@ const { text } = useTypewriter(phrases, {
           <span>{{ text }}</span><span class="caret" aria-hidden="true" />
         </h1>
         <p class="lede">
-          Whether it’s SunaoAI, PukaarAI, or a custom platform, share a few details and we’ll
-          respond with a clear next step.
+          Whether it’s PukaarAI, SunaoCall, SunaoAI, or a custom platform, share a few details and
+          we’ll respond with a clear next step.
         </p>
         <div class="meta">
           <a href="mailto:hello@sunaotechnologies.com">hello@sunaotechnologies.com</a>

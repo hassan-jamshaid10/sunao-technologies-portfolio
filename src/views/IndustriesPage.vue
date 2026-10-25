@@ -26,7 +26,7 @@ const { text } = useTypewriter(phrases, {
           <span class="typed">{{ text }}</span><span class="caret" aria-hidden="true" />
         </h1>
         <p class="lede">
-          From healthcare platforms like SunaoAI to voice-first anonymous reporting with PukaarAI,
+          From elder-care platforms like SunaoCall to voice-first anonymous reporting with PukaarAI,
           we build for the realities of each sector.
         </p>
         <div class="hero-actions">

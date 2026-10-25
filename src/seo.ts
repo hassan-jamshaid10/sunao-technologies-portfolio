@@ -16,7 +16,7 @@ export type SeoMeta = {
 const defaults: SeoMeta = {
   title: 'Sunao Technologies | AI-First Software Engineering',
   description:
-    'Sunao Technologies builds AI-first platforms, cloud infrastructure, and enterprise products. Explore SunaoAI, PukaarAI, and our services across healthcare, enterprise, and more.',
+    'Sunao Technologies builds AI-first platforms, cloud infrastructure, and enterprise products. Explore PukaarAI, SunaoCall, SunaoAI, and our services across healthcare, enterprise, and more.',
   path: '/',
   image: DEFAULT_OG_IMAGE,
   type: 'website',
@@ -55,7 +55,7 @@ export function applySeo(meta: SeoMeta) {
   upsertMeta('name', 'description', description)
   upsertMeta('name', 'robots', meta.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large')
   upsertMeta('name', 'author', SITE_NAME)
-  upsertMeta('name', 'theme-color', '#c97b8f')
+  upsertMeta('name', 'theme-color', '#0097a7')
 
   upsertMeta('property', 'og:site_name', SITE_NAME)
   upsertMeta('property', 'og:title', title)
@@ -113,7 +113,7 @@ export function seoForRoute(name: string | symbol | null | undefined, params: Re
     products: {
       title: 'Products',
       description:
-        'Explore SunaoAI for early dementia detection and PukaarAI for voice-first anonymous reporting. Web and mobile platforms from Sunao Technologies.',
+        'Explore PukaarAI for voice-first anonymous reporting, SunaoCall for elder medication support, and SunaoAI, our early-stage cognitive-health research. Web and mobile platforms from Sunao Technologies.',
       path: '/products',
     },
     about: {
@@ -125,7 +125,7 @@ export function seoForRoute(name: string | symbol | null | undefined, params: Re
     contact: {
       title: 'Contact',
       description:
-        'Start a project with Sunao Technologies. Talk to us about SunaoAI, PukaarAI, or a custom AI, cloud, web, or enterprise build.',
+        'Start a project with Sunao Technologies. Talk to us about PukaarAI, SunaoCall, SunaoAI, or a custom AI, cloud, web, or enterprise build.',
       path: '/contact',
     },
     'not-found': {
