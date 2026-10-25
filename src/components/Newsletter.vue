@@ -88,7 +88,7 @@ function onSubmit() {
   padding: clamp(2.5rem, 5vw, 3.5rem);
   background:
     radial-gradient(ellipse 80% 60% at 70% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
-    linear-gradient(135deg, #1a1216 0%, #2e1f28 45%, #a85f74 100%);
+    linear-gradient(135deg, #1b211c 0%, #2b332c 45%, #00798a 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -209,7 +209,7 @@ h2 {
 
 .right {
   position: relative;
-  background: linear-gradient(145deg, #2a1c24 0%, #a85f74 40%, #e5a07a 100%);
+  background: linear-gradient(145deg, #2b332c 0%, #00798a 40%, #b8903a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -280,8 +280,8 @@ h2 {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a85f74;
-  background: color-mix(in srgb, #c97b8f 14%, #fff);
+  color: #00798a;
+  background: color-mix(in srgb, #0097a7 14%, #fff);
   padding: 0.3rem 0.55rem;
 }
 

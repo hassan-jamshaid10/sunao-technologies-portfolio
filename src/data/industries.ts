@@ -14,10 +14,10 @@ export const industries: Industry[] = [
     shortTitle: 'Healthcare',
     icon: 'lucide:heart-pulse',
     summary:
-      'Clinical platforms and patient workflows, from dementia detection with SunaoAI to care operations software.',
+      'Patient and family-facing platforms, from elder medication support with SunaoCall to early-stage cognitive-health research with SunaoAI.',
     details: [
-      'Cognitive and clinical assessment tools',
-      'Secure patient data patterns',
+      'Medication adherence and care-coordination tools',
+      'Secure patient and family data patterns',
       'Clinician-ready interfaces',
       'Interop with existing hospital systems',
     ],

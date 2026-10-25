@@ -16,7 +16,7 @@ const listEl = ref<HTMLElement | null>(null)
 const welcome: ChatMessage = {
   role: 'model',
   content:
-    "Hello! I'm SunaoBot, your AI assistant for Sunao Technologies.\n\nAsk about SunaoAI, PukaarAI, our services, or how we can help with your next build.",
+    "Hello! I'm SunaoBot, your AI assistant for Sunao Technologies.\n\nAsk about PukaarAI, SunaoCall, SunaoAI, our services, or how we can help with your next build.",
 }
 
 const messages = ref<ChatMessage[]>([{ ...welcome }])
@@ -24,8 +24,8 @@ const messages = ref<ChatMessage[]>([{ ...welcome }])
 const quickActions = [
   { label: 'Our Services', to: '/services' },
   { label: 'Products', to: '/products' },
-  { label: 'SunaoAI', prompt: 'Tell me about SunaoAI' },
   { label: 'PukaarAI', prompt: 'Tell me about PukaarAI' },
+  { label: 'SunaoCall', prompt: 'Tell me about SunaoCall' },
   { label: 'Book a consultation', to: '/contact' },
 ]
 

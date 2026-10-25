@@ -3,9 +3,9 @@ import { Icon } from '@iconify/vue'
 
 const steps = [
   {
-    icon: 'lucide:compass',
-    title: 'Discover',
-    copy: 'We map the problem, users, and constraints, then define what success looks like in measurable terms.',
+    icon: 'lucide:ear',
+    title: 'Listen',
+    copy: 'We talk to the people living with the problem first, then map constraints and define what success looks like.',
   },
   {
     icon: 'lucide:pen-tool',

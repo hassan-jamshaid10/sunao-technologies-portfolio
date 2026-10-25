@@ -95,7 +95,7 @@ const actionLinks = [
   overflow: hidden;
   background:
     radial-gradient(ellipse 60% 50% at 80% 100%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
-    linear-gradient(160deg, #1a1216 0%, #2a1c24 42%, #241820 100%);
+    linear-gradient(160deg, #1b211c 0%, #2b332c 42%, #233029 100%);
   color: rgba(247, 243, 239, 0.72);
 }
 

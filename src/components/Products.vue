@@ -7,9 +7,9 @@ import ProductDevices from './ProductDevices.vue'
 
 const headlines = [
   'Built to make a difference',
-  'SunaoAI: dementia detection',
   'PukaarAI: a call for help',
-  'Web and mobile, ready to ship',
+  'SunaoCall: a call that cares',
+  'SunaoAI: research in motion',
 ]
 
 const { text } = useTypewriter(headlines, {
@@ -28,7 +28,7 @@ const { text } = useTypewriter(headlines, {
           <span class="typed">{{ text }}</span><span class="caret" aria-hidden="true" />
         </h2>
         <p class="sub">
-          SunaoAI and PukaarAI, available across web and mobile, designed for the moments that matter.
+          PukaarAI, SunaoCall, and SunaoAI, three products designed for the moments that matter.
         </p>
       </div>
 
@@ -43,7 +43,10 @@ const { text } = useTypewriter(headlines, {
 
           <div class="copy">
             <p class="tag">{{ product.tag }}</p>
-            <h3>{{ product.name }}</h3>
+            <h3>
+              {{ product.name }}
+              <span v-if="product.stage" class="stage-badge">{{ product.stage.label }}</span>
+            </h3>
             <p>{{ product.copy }}</p>
             <ul>
               <li v-for="point in product.points" :key="point">{{ point }}</li>
@@ -170,9 +173,24 @@ h2 {
 
 .copy h3 {
   margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
   font-size: clamp(1.7rem, 3vw, 2.35rem);
   font-weight: 700;
   letter-spacing: -0.03em;
+}
+
+.stage-badge {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.2rem 0.45rem;
 }
 
 .copy > p {

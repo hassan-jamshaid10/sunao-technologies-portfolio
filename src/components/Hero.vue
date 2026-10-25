@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import HeroScene from './HeroScene.vue'
+import heroPhoto from '../assets/photos/hero-listening.jpg'
 </script>
 
 <template>
   <section id="top" class="hero">
-    <HeroScene />
+    <img :src="heroPhoto" alt="" class="hero-photo" aria-hidden="true" />
     <div class="hero-veil" aria-hidden="true" />
     <div class="hero-content">
-      <p class="eyebrow">Software · AI · Cloud · Products</p>
-      <h1>Engineering intelligent systems that ship.</h1>
+      <p class="eyebrow">Built by listening</p>
+      <h1>We listen to Pakistan's problems, then we build the fix.</h1>
       <p class="lede">
-        Sunao Technologies builds AI-first platforms, cloud infrastructure, and enterprise
-        products, from ML systems and DevOps to web, mobile, ERP, CRM, and healthcare.
+        Sunao means "tell me." We talk to the families, workers, and clinicians living with a
+        problem before we write a line of code, then build AI-first products, platforms, and
+        enterprise systems grounded in what they actually told us.
       </p>
       <div class="cta-row">
         <RouterLink class="btn primary" to="/contact">Start a project</RouterLink>
@@ -30,6 +31,16 @@ import HeroScene from './HeroScene.vue'
   align-items: end;
   overflow: hidden;
   isolation: isolate;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 75% 30%;
 }
 
 .hero-veil {

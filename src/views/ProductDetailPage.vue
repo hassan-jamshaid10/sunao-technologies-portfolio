@@ -16,10 +16,14 @@ const others = computed(() => products.filter((p) => p.id !== product.value?.id)
       <div class="inner hero-grid">
         <div class="copy">
           <p class="eyebrow">Product</p>
-          <h1>{{ product.name }}</h1>
+          <h1>
+            {{ product.name }}
+            <span v-if="product.stage" class="stage-badge">{{ product.stage.label }}</span>
+          </h1>
           <p v-if="product.meaning" class="meaning">“{{ product.meaning }}”</p>
           <p class="tag">{{ product.tag }}</p>
           <p class="lede">{{ product.longCopy }}</p>
+          <p v-if="product.stage" class="stage-note">{{ product.stage.note }}</p>
           <div class="actions">
             <RouterLink class="btn primary" to="/contact">Talk to us</RouterLink>
             <RouterLink class="btn ghost" to="/products">All products</RouterLink>
@@ -33,6 +37,13 @@ const others = computed(() => products.filter((p) => p.id !== product.value?.id)
       <div class="inner wide">
         <p class="eyebrow">The problem</p>
         <p class="problem-copy">{{ product.problem }}</p>
+      </div>
+    </section>
+
+    <section v-if="product.moat" class="moat">
+      <div class="inner wide">
+        <p class="eyebrow">Our edge</p>
+        <p class="moat-copy">{{ product.moat }}</p>
       </div>
     </section>
 
@@ -72,7 +83,7 @@ const others = computed(() => products.filter((p) => p.id !== product.value?.id)
         <div class="device-tags">
           <span><Icon icon="lucide:laptop" width="14" height="14" /> Web</span>
           <span><Icon icon="lucide:smartphone" width="14" height="14" /> Mobile</span>
-          <span v-if="product.id === 'PukaarAI'">
+          <span v-if="product.tag.toLowerCase().includes('voice')">
             <Icon icon="lucide:mic" width="14" height="14" /> Voice-first
           </span>
         </div>
@@ -153,9 +164,31 @@ const others = computed(() => products.filter((p) => p.id !== product.value?.id)
 
 h1 {
   margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   font-size: clamp(2.4rem, 5vw, 3.6rem);
   letter-spacing: -0.04em;
   line-height: 1.05;
+}
+
+.stage-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.3rem 0.6rem;
+}
+
+.stage-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 .meaning {
@@ -179,6 +212,11 @@ h1 {
 .page.teal .tag,
 .page.teal .meaning {
   color: var(--accent);
+}
+
+.page.violet .tag,
+.page.violet .meaning {
+  color: var(--accent-violet);
 }
 
 .lede {
@@ -237,6 +275,20 @@ h1 {
   letter-spacing: -0.02em;
 }
 
+.moat {
+  background: var(--surface-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.moat-copy {
+  margin: 0;
+  max-width: 46rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  line-height: 1.6;
+  letter-spacing: -0.015em;
+  color: var(--text-muted);
+}
+
 .how {
   border-bottom: 1px solid var(--border);
 }
@@ -273,6 +325,10 @@ h1 {
 
 .page.amber .step-ico {
   color: var(--accent-warm);
+}
+
+.page.violet .step-ico {
+  color: var(--accent-violet);
 }
 
 .step h3 {
@@ -331,6 +387,10 @@ h2 {
   color: var(--accent-warm);
 }
 
+.page.violet .ico {
+  color: var(--accent-violet);
+}
+
 .feature h3 {
   margin: 0;
   font-size: 1.05rem;
@@ -369,6 +429,10 @@ li::before {
 
 .page.amber li::before {
   background: var(--accent-warm);
+}
+
+.page.violet li::before {
+  background: var(--accent-violet);
 }
 
 .device-tags {

@@ -7,7 +7,7 @@ import { products } from '../data/products'
 
 const phrases = [
   'Products that change outcomes',
-  'SunaoAI · PukaarAI',
+  'PukaarAI · SunaoCall · SunaoAI',
   'Built for web and mobile',
 ]
 
@@ -27,8 +27,9 @@ const { text } = useTypewriter(phrases, {
           <span>{{ text }}</span><span class="caret" aria-hidden="true" />
         </h1>
         <p class="lede">
-          Two flagship platforms from Sunao Technologies, early dementia detection with
-          SunaoAI, and voice-first anonymous reporting with PukaarAI.
+          Three platforms from Sunao Technologies, voice-first anonymous reporting with
+          PukaarAI, an AI phone companion for elder care with SunaoCall, and SunaoAI, our
+          early-stage research into Urdu cognitive-health screening.
         </p>
         <div class="hero-actions">
           <a class="btn primary" href="#catalog">Explore catalog</a>
@@ -52,7 +53,10 @@ const { text } = useTypewriter(phrases, {
               <p class="tag">{{ product.tag }}</p>
               <span class="index">0{{ i + 1 }}</span>
             </div>
-            <h2>{{ product.name }}</h2>
+            <h2>
+              {{ product.name }}
+              <span v-if="product.stage" class="stage-badge">{{ product.stage.label }}</span>
+            </h2>
             <p class="summary">{{ product.copy }}</p>
             <ul>
               <li v-for="point in product.points" :key="point">{{ point }}</li>
@@ -226,6 +230,10 @@ h1 {
   background: color-mix(in srgb, var(--accent-warm) 4%, var(--bg));
 }
 
+.showcase.violet {
+  background: color-mix(in srgb, var(--accent-violet) 4%, var(--bg));
+}
+
 .showcase-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -275,10 +283,25 @@ h1 {
 
 h2 {
   margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
   font-size: clamp(1.85rem, 3.5vw, 2.6rem);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.1;
+}
+
+.stage-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.22rem 0.5rem;
 }
 
 .summary {
